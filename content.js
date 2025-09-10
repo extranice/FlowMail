@@ -18,22 +18,23 @@ function applySettings(settings) {
 
   // --- Visual Clutter ---
   if (settings.visualClutter?.ads) {
-    // A common selector for the right-hand side ad/info panel
+    // Use attribute selectors for more stability than class names
     css += `div[role="complementary"] { display: none !important; }`;
   }
   if (settings.visualClutter?.extraButtons) {
-     // Example selector for action buttons in the top bar
-    css += `.G-atb { display: none !important; }`;
+    // Example: Hiding the top action buttons in a message view
+    css += `div[role="toolbar"][aria-label="Message actions"] { opacity: 0.5; }`; // Example only
   }
   
   // --- Sizing ---
-  // More complex sizing rules would go here, likely targeting main content areas
-  // For example: .nH.bX.aiu might be the main view.
+  // Example: You might target the main conversation pane and the list pane
+  // Note: These selectors are examples and will need to be verified.
   css += `
     :root {
       --simplify-message-width: ${settings.sizing?.messageWidth || 80}%;
       --simplify-inbox-width: ${settings.sizing?.inboxListWidth || 30}%;
     }
+    /* You would need to find the right elements to apply these variables to */
   `;
 
   // --- Font Customization ---
@@ -50,12 +51,38 @@ function applySettings(settings) {
       font-weight: ${settings.font?.weight || 400} !important;
     }
   `;
-
+  
   // Apply all generated CSS
   styleElement.textContent = css;
 
-  // Other non-CSS changes (like reversing conversation order) would require
-  // more complex DOM manipulation using JavaScript.
+  // --- JAVASCRIPT-BASED CHANGES ---
+  // The features below require direct DOM manipulation, not just CSS.
+  // This is where the bulk of the implementation work is.
+  
+  // --- Conversation Order ---
+  if (settings.conversationOrder === 'newest-first') {
+    // Logic to reverse conversation order
+    // 1. Find the container for all messages in a thread (e.g., using a selector like `div[role="list"]`).
+    // 2. Get all the direct children (the individual message elements).
+    // 3. Reverse the array of children.
+    // 4. Append them back to the container in the new order.
+    // 5. This should be run whenever a conversation is opened. A MutationObserver might be needed to detect this.
+  }
+
+  // --- Pause Inbox ---
+  if (settings.inboxPaused) {
+    // This is complex. A simple approach is to hide the inbox list:
+    // `styleElement.textContent += 'div[role="tabpanel"] { display: none; }';`
+    // A more advanced approach would involve intercepting network requests to prevent new mail data from loading.
+  }
+
+  // --- Contextual Toolbars ---
+  if (settings.contextualToolbars) {
+    // 1. Use CSS to hide the toolbars by default (e.g., `opacity: 0`).
+    // 2. Add mouseover/mouseout event listeners to each message row (`div[role="row"]`).
+    // 3. On mouseover, find the toolbar within that row and make it visible (`opacity: 1`).
+    // 4. On mouseout, hide it again.
+  }
 }
 
 // Load initial settings from storage
@@ -68,7 +95,6 @@ if (chrome && chrome.storage && chrome.storage.local) {
         }
     });
 }
-
 
 // Listen for changes in settings and re-apply
 if (chrome && chrome.storage && chrome.storage.onChanged) {
