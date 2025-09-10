@@ -1,22 +1,35 @@
 {
   "manifest_version": 3,
   "name": "FlowMail",
+  "short_name": "FlowMail",
   "version": "1.0.0",
   "description": "FlowMail: A tool to customize and streamline the Gmail interface for enhanced productivity and a cleaner user experience.",
   "permissions": [
     "storage"
   ],
-  "options_page": "index.html",
+  "host_permissions": [
+    "https://mail.google.com/*"
+  ],
   "action": {
-    "default_title": "FlowMail Settings",
-    "default_popup": "index.html",
+    "default_title": "FlowMail",
+    "default_popup": "popup.html",
     "default_icon": {
       "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
       "48": "icons/icon48.png"
     }
   },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "service_worker": "service-worker.js",
+    "type": "module"
+  },
   "icons": {
     "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
@@ -27,10 +40,22 @@
       ],
       "js": [
         "content.js"
-      ]
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle",
+      "world": "ISOLATED"
     }
   ],
-  "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self';"
-  }
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "content.css"
+      ],
+      "matches": [
+        "https://mail.google.com/*"
+      ]
+    }
+  ]
 }

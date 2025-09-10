@@ -31,12 +31,12 @@ const LayoutSettings: React.FC<LayoutSettingsProps> = ({ settings, setSettings }
 
   return (
     <div className="max-w-4xl mx-auto">
-      <h2 className="text-2xl font-bold mb-6">UI & Layout Customization</h2>
+      <h2 className="text-2xl font-bold mb-6 text-text-light dark:text-text-dark">UI & Layout Customization</h2>
 
       <SettingsCard title="Visual Clutter" description="Clean up the Gmail interface by hiding unnecessary elements.">
-        <ToggleSwitch id="ads" label="Hide Ads" checked={settings.visualClutter.ads} onChange={v => handleToggle('ads', v)} />
-        <ToggleSwitch id="buttons" label="Hide Extra Buttons" checked={settings.visualClutter.extraButtons} onChange={v => handleToggle('extraButtons', v)} />
-        <ToggleSwitch id="toolbars" label="Hide Unused Toolbars" checked={settings.visualClutter.unusedToolbars} onChange={v => handleToggle('unusedToolbars', v)} />
+        <ToggleSwitch id="ads" label="Hide Ads & Promotions" checked={settings.visualClutter.ads} onChange={v => handleToggle('ads', v)} />
+        <ToggleSwitch id="buttons" label="Hide Chat & Meet Panels" checked={settings.visualClutter.extraButtons} onChange={v => handleToggle('extraButtons', v)} />
+        <ToggleSwitch id="toolbars" label="Hide Header Action Icons" checked={settings.visualClutter.unusedToolbars} onChange={v => handleToggle('unusedToolbars', v)} />
       </SettingsCard>
 
       <SettingsCard title="Sizing" description="Adjust the width of key interface areas for your screen size.">
@@ -61,11 +61,17 @@ const LayoutSettings: React.FC<LayoutSettingsProps> = ({ settings, setSettings }
       </SettingsCard>
 
       <SettingsCard title="Custom Themes" description="Select a visual theme that suits your preference.">
-        <div className="flex space-x-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {(['light', 'dark', 'high-contrast'] as Theme[]).map(theme => (
-             <button key={theme} onClick={() => handleTheme(theme)} className={`flex-1 p-4 rounded-lg border-2 transition-colors ${settings.theme === theme ? 'border-primary' : 'border-border-light dark:border-border-dark'}`}>
-                <div className={`w-full h-16 rounded mb-2 ${theme === 'light' ? 'bg-gray-100' : theme === 'dark' ? 'bg-gray-800' : 'bg-black'}`}></div>
-                <span className="capitalize font-medium">{theme}</span>
+             <button key={theme} onClick={() => handleTheme(theme)} className={`text-left p-3 rounded-lg border-2 transition-all ${settings.theme === theme ? 'border-primary scale-105' : 'border-border-light dark:border-border-dark hover:border-gray-400 dark:hover:border-gray-500'}`}>
+                <div className={`w-full h-16 rounded-md mb-3 p-2 flex items-start ${
+                    theme === 'light' ? 'bg-gray-100' : 
+                    theme === 'dark' ? 'bg-gray-800' : 
+                    'bg-black'
+                }`}>
+                  <div className={`w-1/2 h-2 rounded-sm ${theme === 'dark' ? 'bg-gray-600' : 'bg-gray-300'}`}></div>
+                </div>
+                <span className="capitalize font-semibold text-sm text-text-light dark:text-text-dark">{theme}</span>
              </button>
           ))}
         </div>

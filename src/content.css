@@ -1,0 +1,72 @@
+/* FlowMail Injected Stylesheet */
+:root {
+  /* Default values for CSS variables */
+  --flow-message-width: 80%;
+  --flow-inbox-list-width: 30%;
+  --flow-font-family: inherit;
+  --flow-font-size: 14px;
+  --flow-font-weight: 400;
+}
+
+/* --- Visual Clutter --- */
+:root.flow-hide-ads div.Bu.y3[role="complementary"] {
+  display: none !important;
+}
+:root.flow-hide-extra-buttons div[data-tooltip="Meet"],
+:root.flow-hide-extra-buttons div[data-tooltip="Chat"],
+:root.flow-hide-extra-buttons div[data-tooltip="Spaces"] {
+  display: none !important;
+}
+:root.flow-hide-unused-toolbars header#gb div[aria-label="Support"],
+:root.flow-hide-unused-toolbars header#gb div[aria-label^="Settings"],
+:root.flow-hide-unused-toolbars header#gb div[aria-label="Google apps"] {
+  display: none !important;
+}
+
+/* --- Sizing --- */
+div.aYF {
+  max-width: var(--flow-message-width) !important;
+}
+div.bkK {
+  width: var(--flow-inbox-list-width) !important;
+}
+
+/* --- Font Customization --- */
+body, .zA {
+  font-family: var(--flow-font-family) !important;
+  font-size: var(--flow-font-size) !important;
+  font-weight: var(--flow-font-weight) !important;
+}
+
+/* --- Minimalist Views --- */
+:root.flow-minimal-conversation .gE, /* Email header with avatar, name, etc. */
+:root.flow-minimal-conversation .gB, /* Toolbar above email */
+:root.flow-minimal-conversation .adx /* Bottom ad-like elements */ {
+  display: none !important;
+}
+:root.flow-minimal-conversation .hP,
+:root.flow-minimal-conversation .hQ {
+  border: none !important;
+  box-shadow: none !important;
+}
+:root.flow-minimal-compose .aDh { /* Hide bottom toolbar in compose */
+  display: none !important;
+}
+:root.flow-minimal-reply div[aria-label="Reply"] .aDh {
+  display: none !important;
+}
+
+/* --- Label Management --- */
+:root.flow-compact-labels .aim .TO,
+:root.flow-compact-labels .aim .TO div {
+  height: 20px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* --- Contextual Toolbars --- */
+:root.flow-contextual-toolbars tr.zA:not(:hover) .brc, /* Action toolbar on right of row */
+:root.flow-contextual-toolbars tr.zA:not(:hover) .bAu { /* Action icons on left of row */
+  opacity: 0 !important;
+  transition: opacity 0.2s ease-in-out;
+}

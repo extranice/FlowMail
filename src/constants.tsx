@@ -6,14 +6,14 @@ export const NAV_ITEMS: { id: Page; label: string; icon: React.ReactElement }[] 
     id: 'layout',
     label: 'UI & Layout',
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="7" x="3" y="3" rx="1"/><rect width="9" height="7" x="3" y="14" rx="1"/><rect width="5" height="7" x="16" y="14" rx="1"/></svg>
     ),
   },
   {
     id: 'workflow',
     label: 'Inbox & Workflow',
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"></path><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="16" height="16" x="4" y="4" rx="2"/><path d="m4 8 8 5 8-5"/><path d="m12 12 4 2.5"/><path d="M12 12v8"/><path d="m8 12-4 2.5"/></svg>
     ),
   },
   {
@@ -27,7 +27,7 @@ export const NAV_ITEMS: { id: Page; label: string; icon: React.ReactElement }[] 
     id: 'enhancements',
     label: 'Extra Enhancements',
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15.5 2.5a2.5 2.5 0 0 1 3.5 3.5L8.5 17.5l-4.5 1 1-4.5Z"/><path d="m13.5 6.5 4 4"/><path d="m2 16 6 6"/><path d="m18 12 2-2"/><path d="m12 6 2-2"/></svg>
     ),
   },
 ];
@@ -93,7 +93,7 @@ export const DEFAULT_SETTINGS: SettingsState = {
   contextualToolbars: true,
 };
 
-export const FONT_FACES = ['Default', 'Roboto', 'Open Sans', 'Lato', 'Merriweather'];
+export const FONT_FACES = ['Default', 'Inter', 'Roboto', 'Open Sans', 'Lato', 'Merriweather'];
 export const FONT_WEIGHTS = [
     { label: 'Light', value: 300 },
     { label: 'Normal', value: 400 },

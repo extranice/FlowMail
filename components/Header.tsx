@@ -11,7 +11,7 @@ const Header: React.FC = () => {
           <line x1="12" y1="22" x2="12" y2="15" />
         </svg>
         <h1 className="text-xl font-semibold text-text-light dark:text-text-dark">
-          Simplify Gmail
+          FlowMail
         </h1>
       </div>
     </header>

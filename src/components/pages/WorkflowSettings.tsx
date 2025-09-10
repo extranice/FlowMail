@@ -56,7 +56,7 @@ const WorkflowSettings: React.FC<WorkflowSettingsProps> = ({ settings, setSettin
 
   return (
     <div className="max-w-4xl mx-auto">
-      <h2 className="text-2xl font-bold mb-6">Inbox & Workflow Tools</h2>
+      <h2 className="text-2xl font-bold mb-6 text-text-light dark:text-text-dark">Inbox & Workflow Tools</h2>
 
       <SettingsCard title="Pause Inbox" description="Temporarily stop new emails from appearing in your inbox.">
           <ToggleSwitch id="pause-inbox" label={settings.inboxPaused ? "Inbox is Paused" : "Pause Inbox"} checked={settings.inboxPaused} onChange={handlePauseInbox} />
@@ -65,7 +65,7 @@ const WorkflowSettings: React.FC<WorkflowSettingsProps> = ({ settings, setSettin
       <SettingsCard title="Bundled Threads" description="Group emails by category, similar to Inbox by Google.">
           <ToggleSwitch id="bundle-enable" label="Enable Bundled Threads" checked={settings.bundledThreads.enabled} onChange={v => handleBundledThreads('enabled', v)} />
           {settings.bundledThreads.enabled && (
-              <div className="pl-4 border-l-2 border-border-light dark:border-border-dark space-y-4 mt-4">
+              <div className="pl-4 border-l-2 border-border-light dark:border-border-dark space-y-4 mt-4 pt-1">
                   <ToggleSwitch id="bundle-updates" label="Bundle 'Updates'" checked={settings.bundledThreads.categories.updates} onChange={v => handleBundledThreads('updates', v)} />
                   <ToggleSwitch id="bundle-social" label="Bundle 'Social'" checked={settings.bundledThreads.categories.social} onChange={v => handleBundledThreads('social', v)} />
                   <ToggleSwitch id="bundle-finance" label="Bundle 'Finance'" checked={settings.bundledThreads.categories.finance} onChange={v => handleBundledThreads('finance', v)} />
@@ -79,30 +79,33 @@ const WorkflowSettings: React.FC<WorkflowSettingsProps> = ({ settings, setSettin
                 type="text"
                 value={newSearch}
                 onChange={(e) => setNewSearch(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && addSearch()}
                 placeholder="e.g., from:jane has:attachment"
-                className="flex-1 px-3 py-2 bg-white dark:bg-gray-700 border border-border-light dark:border-border-dark rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                className="flex-1 px-3 py-2 bg-card-light dark:bg-gray-700 border border-border-light dark:border-border-dark rounded-md focus:outline-none focus:ring-2 focus:ring-primary text-sm"
               />
-              <button onClick={addSearch} className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">Add</button>
+              <button onClick={addSearch} className="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-md hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-card-light dark:focus:ring-offset-card-dark transition-colors">Add</button>
           </div>
-          <ul className="space-y-2 mt-4">
+          <div className="flex flex-wrap gap-2 mt-4">
             {settings.savedSearches.map(s => (
-                <li key={s.id} className="flex justify-between items-center p-2 bg-background-light dark:bg-background-dark rounded">
-                    <code className="text-sm">{s.query}</code>
-                    <button onClick={() => removeSearch(s.id)} className="text-red-500 hover:text-red-700">Remove</button>
-                </li>
+                <div key={s.id} className="flex items-center gap-2 p-1.5 pl-3 bg-primary-subtle-DEFAULT dark:bg-primary-subtle-dark rounded-full">
+                    <code className="text-xs font-medium text-primary">{s.query}</code>
+                    <button onClick={() => removeSearch(s.id)} className="w-5 h-5 rounded-full bg-primary/20 text-primary hover:bg-primary/30 flex items-center justify-center" aria-label={`Remove ${s.query}`}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
             ))}
-          </ul>
+          </div>
       </SettingsCard>
 
       <SettingsCard title="Enhanced Label Management" description="Customize the appearance and behavior of your labels.">
         <ToggleSwitch id="compact-labels" label="Compact Label View" checked={settings.labels.compactView} onChange={v => setSettings(p => ({...p, labels: {...p.labels, compactView: v}}))} />
-        <div className="space-y-3">
-            <h4 className="font-medium">Custom Label Colors</h4>
+        <div className="space-y-3 pt-2">
+            <h4 className="text-sm font-semibold text-text-light dark:text-text-dark">Custom Label Colors</h4>
             {settings.labels.customColors.map(label => (
-                <div key={label.id} className="flex items-center justify-between">
+                <div key={label.id} className="flex items-center justify-between text-sm">
                     <div className="flex items-center gap-3">
-                        <div className="w-4 h-4 rounded" style={{ backgroundColor: label.color }} />
-                        <span>{label.name}</span>
+                        <div className="w-3.5 h-3.5 rounded-sm" style={{ backgroundColor: label.color }} />
+                        <span className="font-medium text-text-muted-light dark:text-text-muted-dark">{label.name}</span>
                     </div>
                     <ColorPicker color={label.color} onChange={c => handleLabelColorChange(label.id, c)} />
                 </div>

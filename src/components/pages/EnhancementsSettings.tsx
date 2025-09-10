@@ -20,7 +20,7 @@ const EnhancementsSettings: React.FC<EnhancementsSettingsProps> = ({ settings, s
 
   return (
     <div className="max-w-4xl mx-auto">
-      <h2 className="text-2xl font-bold mb-6">Extra Enhancements</h2>
+      <h2 className="text-2xl font-bold mb-6 text-text-light dark:text-text-dark">Extra Enhancements</h2>
 
       <SettingsCard title="Floating Action Buttons (FABs)" description="Enable quick-access floating buttons for common actions.">
         <ToggleSwitch id="fab-compose" label="Enable 'Compose' FAB" checked={settings.floatingActions.compose} onChange={v => handleFabToggle('compose', v)} />
@@ -32,7 +32,7 @@ const EnhancementsSettings: React.FC<EnhancementsSettingsProps> = ({ settings, s
         <ToggleSwitch id="multi-account" label="Streamlined Multi-Account UI" checked={settings.multiAccount} onChange={v => setSettings(p => ({ ...p, multiAccount: v }))} />
         <ToggleSwitch id="notifications" label="Enable Custom Desktop Popups" checked={settings.notifications.enabled} onChange={v => handleNotificationToggle('enabled', v)} />
         {settings.notifications.enabled && (
-             <div className="pl-4 border-l-2 border-border-light dark:border-border-dark mt-4">
+             <div className="pl-4 border-l-2 border-border-light dark:border-border-dark mt-4 pt-1">
                 <ToggleSwitch id="notif-actions" label="Include Quick Actions (Reply, Archive)" checked={settings.notifications.withActions} onChange={v => handleNotificationToggle('withActions', v)} />
             </div>
         )}

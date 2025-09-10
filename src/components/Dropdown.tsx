@@ -26,17 +26,17 @@ const Dropdown = <T extends string | number,>({ label, options, selectedValue, o
 
   return (
     <div className="flex items-center justify-between">
-      <label>{label}</label>
+      <label className="text-sm font-medium text-text-light dark:text-text-dark">{label}</label>
       <div className="relative" ref={dropdownRef}>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center justify-between w-48 px-4 py-2 bg-white dark:bg-gray-700 border border-border-light dark:border-border-dark rounded-md shadow-sm text-left focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-card-light dark:focus:ring-offset-card-dark"
+          className="flex items-center justify-between w-48 px-3 py-2 bg-card-light dark:bg-gray-700 border border-border-light dark:border-border-dark rounded-md shadow-sm text-left text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-card-light dark:focus:ring-offset-card-dark"
         >
           <span>{selectedLabel}</span>
-          <svg className={`w-5 h-5 ml-2 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
+          <svg className={`w-5 h-5 ml-2 text-text-muted-light dark:text-text-muted-dark transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
         </button>
         {isOpen && (
-          <ul className="absolute z-10 w-48 mt-1 bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-md shadow-lg max-h-60 overflow-auto">
+          <ul className="absolute z-10 w-48 mt-1 bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-md shadow-lg max-h-60 overflow-auto focus:outline-none">
             {options.map((option) => (
               <li
                 key={option.value}
@@ -44,7 +44,7 @@ const Dropdown = <T extends string | number,>({ label, options, selectedValue, o
                   onSelect(option.value);
                   setIsOpen(false);
                 }}
-                className="px-4 py-2 text-sm cursor-pointer hover:bg-primary/10"
+                className="px-3 py-2 text-sm cursor-pointer hover:bg-primary-subtle-DEFAULT dark:hover:bg-primary-subtle-dark"
               >
                 {option.label}
               </li>
